@@ -1,0 +1,313 @@
+:root {
+  --purple: #7a5a9e;
+  --purple-deep: #5e3f82;
+  --purple-soft: #e8d9f5;
+  --purple-mid: #c9aee0;
+  --green: #7cbc5a;
+  --green-soft: #d8f0c8;
+  --green-deep: #5a9a3d;
+  --ink: #4a3560;
+  --shadow: rgba(70, 50, 100, 0.28);
+}
+
+.invite {
+  position: relative;
+  width: min(96vw, 560px);
+  aspect-ratio: 3 / 4.2;
+  margin: 0 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.4) 0 2px, transparent 3px),
+    linear-gradient(160deg, #dccaf0 0%, #cbb6e4 50%, #b9a0d6 100%);
+  box-shadow: 0 22px 48px var(--shadow);
+  color: var(--ink);
+  font-family: "Quicksand", sans-serif;
+}
+
+.invite::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 2px dashed rgba(255, 255, 255, 0.55);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invite-stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, #fff 0 1.2px, transparent 1.8px),
+    radial-gradient(circle, var(--purple-soft) 0 1px, transparent 1.6px);
+  background-size: 46px 50px, 34px 38px;
+  background-position: 10px 12px, 22px 26px;
+}
+
+.invite-inner {
+  position: absolute;
+  inset: 20px;
+  z-index: 2;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px dashed var(--purple-mid);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+}
+
+.invite-copy {
+  padding: 1rem 0.85rem 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  min-width: 0;
+}
+
+.invite-side {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(216, 240, 200, 0.55), transparent 45%),
+    linear-gradient(180deg, #f7f1fc 0%, #eef8e8 100%);
+  overflow: hidden;
+}
+
+.invite-side::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 45%;
+  left: -10%;
+  bottom: -8%;
+  background: radial-gradient(ellipse at center, #d8c4ec 0%, transparent 70%);
+  opacity: 0.55;
+}
+
+.invite-baby {
+  position: relative;
+  z-index: 2;
+  width: 112%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  transform: translate(4%, 4%);
+  filter: drop-shadow(0 10px 16px rgba(70, 50, 100, 0.18));
+  pointer-events: none;
+  user-select: none;
+}
+
+.invite-kicker {
+  font-size: clamp(0.62rem, 1.8vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--purple);
+  text-transform: uppercase;
+}
+
+.invite-title {
+  margin-top: 0.1rem;
+  font-size: clamp(1rem, 3.4vw, 1.35rem);
+  font-weight: 800;
+  color: var(--purple-deep);
+  line-height: 1.1;
+}
+
+.invite-sub {
+  margin-top: 0.35rem;
+  font-size: clamp(0.58rem, 1.6vw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--green-deep);
+  text-transform: uppercase;
+}
+
+.invite-script {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(1.9rem, 6vw, 2.55rem);
+  color: var(--purple);
+  line-height: 1;
+  margin: 0.05rem 0 0.45rem;
+}
+
+.invite-honor-label {
+  font-size: clamp(0.58rem, 1.5vw, 0.7rem);
+  font-weight: 700;
+  color: var(--green-deep);
+  letter-spacing: 0.08em;
+}
+
+.invite-honor-label::before,
+.invite-honor-label::after {
+  content: " ★ ";
+  color: var(--green);
+}
+
+.invite-honor {
+  margin-top: 0.3rem;
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  border-radius: 10px;
+  background: var(--purple-soft);
+  color: var(--purple-deep);
+  font-weight: 700;
+  font-size: clamp(0.72rem, 2.1vw, 0.9rem);
+  line-height: 1.25;
+}
+
+.invite-para-label {
+  margin-top: 0.55rem;
+  font-size: clamp(0.75rem, 2vw, 0.88rem);
+  font-weight: 800;
+  color: var(--green-deep);
+}
+
+.invite-para {
+  margin-top: 0.25rem;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 10px;
+  background: var(--green-soft);
+  border: 1.5px dashed #8fbf6d;
+  color: var(--purple-deep);
+  font-weight: 800;
+  font-size: clamp(0.72rem, 2.1vw, 0.92rem);
+  line-height: 1.25;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.invite-meta {
+  margin-top: 0.65rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: clamp(0.62rem, 1.8vw, 0.76rem);
+  font-weight: 600;
+}
+
+.invite-meta div {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+
+.invite-meta .ico {
+  width: 1.05rem;
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.invite-meta strong {
+  color: var(--purple-deep);
+}
+
+.invite-confirma {
+  margin-top: auto;
+  width: 100%;
+  padding: 0.5rem 0.55rem;
+  border-radius: 12px;
+  background: var(--purple-soft);
+  font-size: clamp(0.58rem, 1.7vw, 0.72rem);
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--purple-deep);
+}
+
+.invite-confirma .head {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.15rem;
+  letter-spacing: 0.03em;
+}
+
+.invite-confirma .money {
+  color: var(--green-deep);
+}
+
+/* Mini para el panel */
+.invite.mini {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.invite.mini .invite-inner {
+  inset: 12px;
+  border-radius: 12px;
+}
+
+.invite.mini .invite-copy {
+  padding: 0.55rem 0.45rem 0.5rem 0.55rem;
+}
+
+.invite.mini .invite-kicker {
+  font-size: 0.48rem;
+}
+
+.invite.mini .invite-title {
+  font-size: 0.62rem;
+}
+
+.invite.mini .invite-sub {
+  font-size: 0.42rem;
+  margin-top: 0.2rem;
+}
+
+.invite.mini .invite-script {
+  font-size: 1.05rem;
+}
+
+.invite.mini .invite-honor-label {
+  font-size: 0.42rem;
+}
+
+.invite.mini .invite-honor {
+  font-size: 0.5rem;
+  padding: 0.28rem 0.35rem;
+}
+
+.invite.mini .invite-para-label {
+  font-size: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.invite.mini .invite-para {
+  font-size: 0.5rem;
+  min-height: 1.55rem;
+  padding: 0.25rem 0.3rem;
+}
+
+.invite.mini .invite-meta {
+  font-size: 0.42rem;
+  margin-top: 0.35rem;
+  gap: 0.18rem;
+}
+
+.invite.mini .invite-confirma {
+  font-size: 0.4rem;
+  padding: 0.3rem 0.35rem;
+}
+
+@media (min-width: 900px) {
+  .invite:not(.mini) {
+    width: min(94vw, 640px);
+  }
+}
+
+@media (max-width: 420px) {
+  .invite-inner {
+    grid-template-columns: 1fr 0.75fr;
+  }
+}

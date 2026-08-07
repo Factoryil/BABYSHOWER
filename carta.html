@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
     />
-    <title>Todas las invitaciones — Baby Shower Steven</title>
+    <title>Invitación Baby Shower</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +15,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="mode-panel">
+  <body class="mode-carta">
     <div class="page-bg" aria-hidden="true">
       <div class="bg-orb bg-orb-a"></div>
       <div class="bg-orb bg-orb-b"></div>
@@ -24,17 +24,16 @@
       <div class="bg-stars" id="bgStars"></div>
     </div>
 
-    <header class="panel-top">
-      <p class="panel-eyebrow">Baby Shower</p>
-      <h1>Steven Saith Salazar Rodríguez</h1>
-      <p class="panel-lead">
-        Aquí están todas las cartas. Copia el link de cada invitado y envíaselo:
-        esa persona solo verá su invitación.
-      </p>
-    </header>
+    <main class="page page-carta">
+      <div id="cartaRoot"></div>
+      <div class="actions actions-carta">
+        <button type="button" class="btn btn-location" id="locationBtn">
+          📍 Ver ubicación
+        </button>
+      </div>
+    </main>
 
-    <main class="panel-grid" id="panelGrid"></main>
-    <div class="toast" id="toast" role="status">Link copiado</div>
+    <div class="toast" id="toast" role="status"></div>
 
     <script src="invitados.js"></script>
     <script src="invite-markup.js"></script>

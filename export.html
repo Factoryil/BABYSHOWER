@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Export Invitación</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="export.css" />
+  </head>
+  <body class="export-body">
+    <article class="card revealed export-card" id="card">
+      <div class="card-inner" id="cardInner">
+        <img
+          src="assets/invitacion.png"
+          alt="Invitación Baby Shower"
+          class="card-image"
+          draggable="false"
+        />
+
+        <div class="card-data">
+          <p class="data-honor-label">EN HONOR A</p>
+          <p class="data-name" id="dataName">—</p>
+          <p class="data-parents" id="dataParents">—</p>
+
+          <ul class="data-list">
+            <li>
+              <span class="data-label">Fecha</span>
+              <span class="data-value" id="dataFecha">—</span>
+            </li>
+            <li>
+              <span class="data-label">Hora</span>
+              <span class="data-value" id="dataHora">—</span>
+            </li>
+            <li>
+              <span class="data-label">Lugar</span>
+              <span class="data-value" id="dataLugar">—</span>
+            </li>
+            <li class="data-confirma-row">
+              <span class="data-value data-confirma" id="dataConfirma">—</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <script src="export.js"></script>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  min-height: 100dvh;
+  color: #4a3560;
+  background: #5eb8e8;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: #5eb8e8;
+  background-image: url("assets/fondo-nubes.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.panel-header,
+.panel-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.panel-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 1rem;
+}
+
+.eyebrow {
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 0.78rem;
+  text-shadow: 0 2px 8px rgba(40, 80, 120, 0.35);
+}
+
+.panel-header h1 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(40, 80, 120, 0.4);
+}
+
+.lead {
+  margin-top: 0.4rem;
+  max-width: 40rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  text-shadow: 0 1px 8px rgba(40, 80, 120, 0.35);
+}
+
+.panel-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem 1rem 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.35rem;
+}
+
+.guest-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 18px;
+  padding: 0.85rem;
+  box-shadow: 0 12px 30px rgba(40, 70, 110, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.guest-card .preview {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.guest-card .meta h2 {
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: #5e3f82;
+}
+
+.guest-card .meta .num {
+  display: inline-block;
+  margin-bottom: 0.2rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #7cbc5a;
+  letter-spacing: 0.06em;
+}
+
+.link-box {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  background: #f4eef9;
+  border-radius: 10px;
+  padding: 0.45rem 0.5rem;
+}
+
+.link-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #5e3f82;
+  outline: none;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.actions button,
+.actions a {
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.7rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-copy {
+  background: #e8d9f5;
+  color: #5e3f82;
+}
+
+.btn-open {
+  background: linear-gradient(135deg, #9b7bb8, #7d5a9e);
+  color: #fff;
+}
+
+.actions button:hover,
+.actions a:hover {
+  filter: brightness(1.05);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%) translateY(20px);
+  background: #5e3f82;
+  color: #fff;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s ease;
+  z-index: 20;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
