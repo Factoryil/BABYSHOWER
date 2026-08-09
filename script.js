@@ -323,7 +323,7 @@
       if (!e.target.closest("[data-whatsapp]")) return;
       openWhatsApp(
         CONTACTO.telefono,
-        `Hola Merys 👋\nQuiero confirmar cupos para el Baby Shower de Steven.\nInvitación: *${nombre}*\nCupo x persona: $100.000\n¿Cuántos cupos confirmo?`
+        `Hola Merys 👋\nQuiero confirmar cupos para el Baby Shower de Steven.\nInvitación: *${nombre}*\nCupo x persona: $100.000\nConfirmar antes del 12 de agosto de 2026\n¿Cuántos cupos confirmo?`
       );
       showToast("Abriendo WhatsApp para confirmar…");
     });

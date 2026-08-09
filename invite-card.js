@@ -4,7 +4,7 @@ window.INVITE_DATA = {
   hora: "5:00 p.m. – 11:00 p.m.",
   lugar: "Combarranquilla del Boston, Salón N.º 5",
   confirmaTitulo: "CONFIRMA ASISTENCIA",
-  cupo: "Cupo x persona: $100.000",
+  cupo: "Cupo x persona: $100.000 · Confirmar antes del 12 de agosto de 2026",
   nequi: "Nequi: 305 365 9842 (Merys Vargas)",
 };
 

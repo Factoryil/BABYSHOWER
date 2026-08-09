@@ -115,6 +115,7 @@ window.renderInviteMarkup = function renderInviteMarkup(guestName, options = {})
               <div class="confirm-copy">
                 <h3>Confirma asistencia</h3>
                 <p class="confirm-cupo">Cupo x persona: <strong>$100.000</strong></p>
+                <p class="confirm-deadline">Confirmar cupo antes del <strong>12 de agosto de 2026</strong></p>
               </div>
             </div>
             <div class="confirm-phone-block">
