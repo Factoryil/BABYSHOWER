@@ -1038,7 +1038,7 @@ button {
   }
 
   .panel-actions {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   .panel-actions .btn,
@@ -1047,7 +1047,12 @@ button {
   }
 
   .panel-link input {
-    font-size: 0.62rem;
+    font-size: 0.58rem;
+  }
+
+  .btn-link-copy {
+    min-height: 40px;
+    font-size: 0.7rem;
   }
 }
 
@@ -1318,14 +1323,19 @@ button {
 }
 
 .panel-link {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.4rem;
   background: var(--purple-soft);
   border-radius: 12px;
-  padding: 0.5rem 0.6rem;
+  padding: 0.45rem 0.45rem 0.45rem 0.65rem;
+  border: 1px solid rgba(139, 107, 179, 0.18);
 }
 
 .panel-link input {
   width: 100%;
+  min-width: 0;
   border: none;
   background: transparent;
   font: inherit;
@@ -1333,12 +1343,39 @@ button {
   font-weight: 600;
   color: var(--purple-deep);
   outline: none;
+  cursor: text;
+}
+
+.btn-link-copy {
+  border: none;
+  border-radius: 10px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #9b7bb8, #6f528f);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-link-copy:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 .panel-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.45rem;
+}
+
+.panel-actions .btn-open {
+  grid-column: 1 / -1;
+}
+
+.btn-share {
+  background: linear-gradient(135deg, #6db8e8, #4a8fc4);
 }
 
 .btn-open {

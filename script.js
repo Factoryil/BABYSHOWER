@@ -41,6 +41,57 @@
     );
   }
 
+  async function copyText(text, inputEl) {
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        /* fallback abajo */
+      }
+    }
+
+    try {
+      if (inputEl) {
+        inputEl.focus();
+        inputEl.select();
+        inputEl.setSelectionRange(0, text.length);
+        if (document.execCommand("copy")) return true;
+      }
+
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;left:-9999px;top:0;opacity:0;";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+
+  async function shareLink(link, nombre) {
+    const title = "Baby Shower — Steven Saith";
+    const text = `Invitación Baby Shower para ${nombre}`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text, url: link });
+        return "shared";
+      } catch (err) {
+        if (err?.name === "AbortError") return "cancelled";
+      }
+    }
+
+    const ok = await copyText(link);
+    return ok ? "copied" : "failed";
+  }
+
   /* ——— Página normal: todas las cartas ——— */
   function initPanel() {
     const grid = document.getElementById("panelGrid");
@@ -52,6 +103,7 @@
 
       const item = document.createElement("section");
       item.className = "panel-card";
+      item.dataset.index = String(index);
       item.innerHTML = `
         <div class="panel-preview">
           ${window.renderInviteMarkup(nombre, { mini: true })}
@@ -62,26 +114,57 @@
         </div>
         <div class="panel-link">
           <input type="text" readonly value="${link}" aria-label="Link de la invitación" />
+          <button type="button" class="btn-link-copy" data-action="copy" title="Copiar link" aria-label="Copiar link">
+            Copiar
+          </button>
         </div>
         <div class="panel-actions">
-          <button type="button" class="btn btn-copy" data-copy="${link}">Copiar link</button>
-          <a class="btn btn-open" href="carta#${id}" target="_blank" rel="noopener">Abrir carta</a>
+          <button type="button" class="btn btn-copy" data-action="copy">Copiar link</button>
+          <button type="button" class="btn btn-share" data-action="share">Compartir</button>
+          <a class="btn btn-open" href="${link}" target="_blank" rel="noopener">Abrir carta</a>
         </div>
       `;
       grid.appendChild(item);
     });
 
+    grid.addEventListener("focusin", (e) => {
+      const input = e.target.closest(".panel-link input");
+      if (!input) return;
+      input.select();
+    });
+
     grid.addEventListener("click", async (e) => {
-      const btn = e.target.closest("[data-copy]");
-      if (!btn) return;
-      try {
-        await navigator.clipboard.writeText(btn.dataset.copy);
-      } catch {
-        const input = btn.closest(".panel-card").querySelector("input");
+      const input = e.target.closest(".panel-link input");
+      if (input) {
+        input.focus();
         input.select();
-        document.execCommand("copy");
+        return;
       }
-      showToast("Link copiado");
+
+      const actionBtn = e.target.closest("[data-action]");
+      if (!actionBtn) return;
+
+      const card = actionBtn.closest(".panel-card");
+      if (!card) return;
+
+      const index = Number(card.dataset.index);
+      const nombre = INVITADOS[index];
+      const link = window.guestLink(index);
+      const linkInput = card.querySelector(".panel-link input");
+      const action = actionBtn.dataset.action;
+
+      if (action === "copy") {
+        const ok = await copyText(link, linkInput);
+        showToast(ok ? "Link copiado. Ya puedes pegarlo y enviarlo." : "No se pudo copiar. Selecciona el link y cópialo manualmente.");
+        return;
+      }
+
+      if (action === "share") {
+        const result = await shareLink(link, nombre);
+        if (result === "shared") showToast("Listo para compartir");
+        else if (result === "copied") showToast("Link copiado. Ya puedes pegarlo y enviarlo.");
+        else if (result === "failed") showToast("No se pudo compartir. Copia el link manualmente.");
+      }
     });
 
     requestAnimationFrame(() => window.fitGuestNames(grid));
