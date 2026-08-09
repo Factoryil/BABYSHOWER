@@ -66,7 +66,8 @@ window.fitGuestName = function fitGuestName(root = document) {
 
 window.guestLink = function guestLink(index) {
   const id = String(index + 1).padStart(2, "0");
-  return `${location.origin}/carta#${id}`;
+  const base = window.SITE_BASE || "https://factoryil.github.io/BABYSHOWER";
+  return `${base}/carta#${id}`;
 };
 
 window.getGuestById = function getGuestById(id) {

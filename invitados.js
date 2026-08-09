@@ -34,8 +34,10 @@ window.INVITADOS = [
 
 window.padId = (n) => String(n).padStart(2, "0");
 
+window.SITE_BASE = "https://factoryil.github.io/BABYSHOWER";
+
 window.guestLink = (index) =>
-  `${location.origin}/carta#${window.padId(index + 1)}`;
+  `${window.SITE_BASE}/carta#${window.padId(index + 1)}`;
 
 window.getGuestIndex = (id) => {
   const n = parseInt(String(id || "").replace(/\D/g, ""), 10);
