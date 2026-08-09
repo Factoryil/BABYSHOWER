@@ -30,6 +30,14 @@ window.INVITADOS = [
   "Elizabeth C. Correa, esposo y Sara Juanita",
   "Rubén Palacios",
   "Rubén Darío Correa Soto",
+  "Zulma Inés Correa Reyes y Jeovel Correa",
+  "Henry Rojas y Patricia Soto",
+  "Jhon Baruc Soto y Nancy Collazos",
+  "Óscar Africano y esposa",
+  "Julián Andrés Salazar Valencia",
+  "Robert Naun Soto Orozco",
+  "Celina Orozco",
+  "Luis Guillermo Muñoz Sánchez, esposa e hija",
 ];
 
 window.padId = (n) => String(n).padStart(2, "0");
