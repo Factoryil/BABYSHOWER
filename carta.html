@@ -6,7 +6,41 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
     />
-    <title>Invitación Baby Shower</title>
+    <title>Invitación Baby Shower — Steven Saith</title>
+    <meta
+      name="description"
+      content="Te invitamos al Baby Shower de Steven Saith Salazar Rodríguez. Abre tu carta personalizada."
+    />
+
+    <!-- Preview grande al compartir el link (WhatsApp, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Baby Shower Steven" />
+    <meta property="og:title" content="Baby Shower — Steven Saith Salazar Rodríguez" />
+    <meta
+      property="og:description"
+      content="Toca para abrir tu invitación personalizada."
+    />
+    <meta
+      property="og:image"
+      content="https://factoryil.github.io/BABYSHOWER/assets/og-invite.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:url"
+      content="https://factoryil.github.io/BABYSHOWER/carta"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Baby Shower — Steven Saith Salazar Rodríguez" />
+    <meta
+      name="twitter:description"
+      content="Toca para abrir tu invitación personalizada."
+    />
+    <meta
+      name="twitter:image"
+      content="https://factoryil.github.io/BABYSHOWER/assets/og-invite.png"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +49,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="mode-carta">
+  <body class="mode-carta is-sealed">
     <div class="page-bg" aria-hidden="true">
       <div class="bg-orb bg-orb-a"></div>
       <div class="bg-orb bg-orb-b"></div>
@@ -25,11 +59,38 @@
     </div>
 
     <main class="page page-carta">
-      <div id="cartaRoot"></div>
-      <div class="actions actions-carta">
-        <button type="button" class="btn btn-location" id="locationBtn">
-          📍 Ver ubicación
+      <!-- Tarjeta grande inicial -->
+      <section class="seal-card" id="sealCard" aria-label="Abrir invitación">
+        <div class="seal-glow" aria-hidden="true"></div>
+        <p class="seal-eyebrow">Baby Shower</p>
+        <h1 class="seal-title">Steven Saith Salazar Rodríguez</h1>
+        <p class="seal-for" id="sealGuest">Tu invitación te espera</p>
+        <div class="seal-figure">
+          <img
+            src="assets/alien-toy.png"
+            alt="Marcianito Toy Story"
+            class="seal-alien"
+            draggable="false"
+          />
+        </div>
+        <button type="button" class="btn btn-open-letter" id="openLetterBtn">
+          Abrir la carta
         </button>
+        <p class="seal-hint">Toca el botón para revelar tu invitación</p>
+      </section>
+
+      <div class="carta-stage is-hidden" id="cartaStage">
+        <div class="tilt-scene" id="tiltScene">
+          <div class="tilt-card" id="tiltCard">
+            <div id="cartaRoot"></div>
+          </div>
+        </div>
+        <p class="tilt-hint" id="tiltHint">Mueve el dedo o el mouse para verla en 3D</p>
+        <div class="actions actions-carta">
+          <button type="button" class="btn btn-location" id="locationBtn" hidden>
+            Ver ubicación
+          </button>
+        </div>
       </div>
     </main>
 

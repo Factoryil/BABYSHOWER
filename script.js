@@ -7,7 +7,7 @@
 
   const CONTACTO = {
     telefono: "3053659842",
-    lugar: "Club Barranquilla, Salón N.º 5",
+    lugar: "Combarranquilla del Boston, Salón N.º 5",
     maps: "https://maps.app.goo.gl/G1dfoQDGTQfq8CtK7",
   };
 
@@ -171,37 +171,101 @@
     window.addEventListener("resize", () => window.fitGuestNames(grid));
   }
 
-  /* ——— Link personal: solo su carta, sin pasar a otras ——— */
+  function enableTilt(scene, card) {
+    if (!scene || !card) return;
+    const max = 14;
+    let raf = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let active = false;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+      const rx = currentY * -1;
+      const ry = currentX;
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+      const glareX = 50 + currentX * 2.2;
+      const glareY = 50 + currentY * 2.2;
+      card.style.setProperty("--glare-x", `${glareX}%`);
+      card.style.setProperty("--glare-y", `${glareY}%`);
+      raf = requestAnimationFrame(render);
+    };
+
+    const setFromPoint = (clientX, clientY) => {
+      const rect = scene.getBoundingClientRect();
+      const px = (clientX - rect.left) / rect.width;
+      const py = (clientY - rect.top) / rect.height;
+      targetX = (px - 0.5) * 2 * max;
+      targetY = (py - 0.5) * 2 * max;
+    };
+
+    const onMove = (e) => {
+      const point = e.touches ? e.touches[0] : e;
+      if (!point) return;
+      active = true;
+      setFromPoint(point.clientX, point.clientY);
+    };
+
+    const onLeave = () => {
+      active = false;
+      targetX = 0;
+      targetY = 0;
+    };
+
+    scene.addEventListener("pointermove", onMove, { passive: true });
+    scene.addEventListener("pointerdown", onMove, { passive: true });
+    scene.addEventListener("pointerleave", onLeave);
+    scene.addEventListener("pointerup", onLeave);
+
+    // Ligero movimiento idle cuando no se toca
+    let t = 0;
+    const idle = () => {
+      if (!active) {
+        t += 0.018;
+        targetX = Math.sin(t) * 4.5;
+        targetY = Math.cos(t * 0.8) * 3.2;
+      }
+    };
+    setInterval(idle, 32);
+    raf = requestAnimationFrame(render);
+  }
+
+  /* ——— Link personal: sello → carta 3D ——— */
   function initCarta() {
     const root = document.getElementById("cartaRoot");
     const locationBtn = document.getElementById("locationBtn");
+    const sealCard = document.getElementById("sealCard");
+    const openBtn = document.getElementById("openLetterBtn");
+    const stage = document.getElementById("cartaStage");
+    const tiltScene = document.getElementById("tiltScene");
+    const tiltCard = document.getElementById("tiltCard");
+    const sealGuest = document.getElementById("sealGuest");
     if (!root) return;
 
     const hashId = location.hash.replace(/^#/, "");
     const index = window.getGuestIndex(hashId);
 
     if (index === null) {
+      if (sealCard) sealCard.hidden = true;
       root.innerHTML = `
         <div class="carta-error">
           <h1>Invitación no encontrada</h1>
           <p>Este link no es válido. Pide el link correcto a quien te invitó.</p>
         </div>
       `;
+      stage?.classList.remove("is-hidden");
       if (locationBtn) locationBtn.hidden = true;
       return;
     }
 
-    // Bloquea cambiar el hash a otra invitación
     const lockedId = window.padId(index + 1);
     const nombre = INVITADOS[index];
 
-    root.innerHTML = window.renderInviteMarkup(nombre, {
-      id: "inviteCard",
-      showWhatsApp: true,
-      showLocationLink: true,
-    });
-
     document.title = `Baby Shower — ${nombre}`;
+    if (sealGuest) sealGuest.textContent = `Para: ${nombre}`;
 
     const lockHash = () => {
       if (location.hash.replace(/^#/, "") !== lockedId) {
@@ -211,7 +275,6 @@
     lockHash();
     window.addEventListener("hashchange", lockHash);
 
-    // Sin flechas ni teclado para cambiar de invitado
     window.addEventListener(
       "keydown",
       (e) => {
@@ -223,7 +286,39 @@
       true
     );
 
-    // WhatsApp = solo confirmar cupos / asistencia
+    let opened = false;
+    const revealInvite = () => {
+      if (opened) return;
+      opened = true;
+
+      root.innerHTML = window.renderInviteMarkup(nombre, {
+        id: "inviteCard",
+        showWhatsApp: true,
+        showLocationLink: true,
+      });
+
+      document.body.classList.remove("is-sealed");
+      document.body.classList.add("is-open");
+      sealCard?.classList.add("is-leaving");
+
+      setTimeout(() => {
+        if (sealCard) sealCard.hidden = true;
+        stage?.classList.remove("is-hidden");
+        stage?.classList.add("is-revealed");
+        if (locationBtn) locationBtn.hidden = false;
+        enableTilt(tiltScene, tiltCard);
+        requestAnimationFrame(() => window.fitGuestNames(root));
+        document.fonts?.ready?.then(() => window.fitGuestNames(root));
+        showToast("Mueve la carta para ver el efecto 3D");
+      }, 420);
+    };
+
+    openBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      revealInvite();
+    });
+    sealCard?.addEventListener("click", () => revealInvite());
+
     root.addEventListener("click", (e) => {
       if (!e.target.closest("[data-whatsapp]")) return;
       openWhatsApp(
@@ -233,18 +328,11 @@
       showToast("Abriendo WhatsApp para confirmar…");
     });
 
-    // Ubicación = solo abrir el mapa del lugar
     locationBtn?.addEventListener("click", () => {
       window.open(CONTACTO.maps, "_blank", "noopener,noreferrer");
       showToast("Abriendo ubicación…");
     });
 
-    // Ocultar botón de compartir si existiera en HTML viejo
-    const shareLocationBtn = document.getElementById("shareLocationBtn");
-    if (shareLocationBtn) shareLocationBtn.hidden = true;
-
-    requestAnimationFrame(() => window.fitGuestNames(root));
-    document.fonts?.ready?.then(() => window.fitGuestNames(root));
     window.addEventListener("resize", () => window.fitGuestNames(root));
   }
 

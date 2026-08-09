@@ -1428,6 +1428,210 @@ button {
   background: linear-gradient(135deg, #9b7bb8, #6f528f);
 }
 
+/* ——— Sello / tarjeta grande al abrir el link ——— */
+.mode-carta.is-sealed .actions-carta {
+  display: none;
+}
+
+.seal-card {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 420px);
+  margin: 0 auto;
+  padding: 1.8rem 1.35rem 1.5rem;
+  border-radius: 28px;
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(236, 224, 248, 0.82) 48%,
+    rgba(228, 244, 214, 0.85) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 22px 50px rgba(74, 53, 110, 0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+  cursor: pointer;
+  animation: cardIn 0.85s cubic-bezier(0.22, 1.12, 0.36, 1) both;
+  transition: transform 0.45s ease, opacity 0.45s ease;
+}
+
+.seal-card.is-leaving {
+  transform: scale(0.92) rotateX(12deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.seal-glow {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 55%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), transparent 70%);
+  pointer-events: none;
+}
+
+.seal-eyebrow {
+  position: relative;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+.seal-title {
+  position: relative;
+  margin-top: 0.45rem;
+  font-size: clamp(1.25rem, 5.5vw, 1.55rem);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--purple-deep);
+}
+
+.seal-for {
+  position: relative;
+  margin-top: 0.65rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  line-height: 1.35;
+  padding: 0 0.35rem;
+}
+
+.seal-figure {
+  position: relative;
+  margin: 1.1rem auto 0.35rem;
+  width: min(78%, 280px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 18px 22px rgba(74, 53, 110, 0.28));
+}
+
+.seal-alien {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+  animation: floatBuzz 4.5s ease-in-out infinite;
+}
+
+.btn-open-letter {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.85rem;
+  width: 100%;
+  min-height: 52px;
+  border: none;
+  border-radius: 999px;
+  padding: 0.95rem 1.2rem;
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #9b7bb8, #6f528f);
+  box-shadow: 0 12px 28px rgba(111, 82, 143, 0.35);
+  transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+.btn-open-letter:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.seal-hint {
+  position: relative;
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ——— Escenario carta 3D ——— */
+.carta-stage {
+  width: min(100%, var(--invite-w));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.carta-stage.is-hidden {
+  display: none;
+}
+
+.carta-stage.is-revealed {
+  animation: cardIn 0.75s cubic-bezier(0.22, 1.12, 0.36, 1) both;
+}
+
+.tilt-scene {
+  width: 100%;
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+  padding: 0.35rem 0.15rem 0.6rem;
+}
+
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.25s ease;
+}
+
+.tilt-card::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 8;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 40%),
+    rgba(255, 255, 255, 0.34),
+    transparent 42%
+  );
+  mix-blend-mode: soft-light;
+}
+
+.tilt-card .invite {
+  width: 100%;
+  transform: translateZ(18px);
+  box-shadow:
+    0 28px 50px rgba(74, 53, 110, 0.28),
+    0 2px 0 rgba(255, 255, 255, 0.35) inset;
+}
+
+.tilt-hint {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(60, 50, 90, 0.35);
+}
+
+@media (max-width: 767px) {
+  .seal-card {
+    width: min(100%, 400px);
+    padding: 1.45rem 1.1rem 1.25rem;
+    border-radius: 24px;
+  }
+
+  .seal-figure {
+    width: min(82%, 240px);
+  }
+
+  .seal-alien {
+    max-height: 230px;
+  }
+
+  .tilt-scene {
+    perspective: 900px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .invite,
   .nav,
@@ -1437,7 +1641,14 @@ button {
   .buzz,
   .invite-star,
   .dot,
-  .name-card-guest.pulse {
+  .name-card-guest.pulse,
+  .seal-alien,
+  .seal-card,
+  .carta-stage.is-revealed {
     animation: none !important;
+  }
+
+  .tilt-card {
+    transform: none !important;
   }
 }

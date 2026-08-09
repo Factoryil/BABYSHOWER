@@ -2,7 +2,7 @@ window.INVITE_DATA = {
   honor: "Steven Saith Salazar Rodríguez",
   fecha: "Sábado 15 de agosto, 2026",
   hora: "5:00 p.m. – 11:00 p.m.",
-  lugar: "Club Barranquilla, Salón N.º 5",
+  lugar: "Combarranquilla del Boston, Salón N.º 5",
   confirmaTitulo: "CONFIRMA ASISTENCIA",
   cupo: "Cupo x persona: $100.000",
   nequi: "Nequi: 305 365 9842 (Merys Vargas)",

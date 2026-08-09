@@ -88,7 +88,7 @@ window.renderInviteMarkup = function renderInviteMarkup(guestName, options = {})
               </span>
               <div class="info-text">
                 <span>Lugar</span>
-                <strong>Club Barranquilla, Salón N.º 5</strong>
+                <strong>Combarranquilla del Boston, Salón N.º 5</strong>
                 ${
                   options.showLocationLink
                     ? `<a class="lugar-link" href="https://maps.app.goo.gl/G1dfoQDGTQfq8CtK7" target="_blank" rel="noopener">Ver en el mapa</a>`
